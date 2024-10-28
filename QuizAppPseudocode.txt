@@ -1,0 +1,64 @@
+# Pseudocode for Node.js Quiz App
+
+---
+
+## Define Class `QuizApp`
+
+- **Properties:**
+  - `questions`: A list of questions (each containing `text` and `answer`).
+  - `score`: Stores the user’s score, initially set to 0.
+  - `totalQuizTime`: Total time allowed for the entire quiz, converted to milliseconds.
+  - `timePerQuestion`: Maximum time allowed per question (15 seconds), in milliseconds.
+
+---
+
+## Method: `start`
+
+1. Display a message indicating the quiz is starting and explain time limits.
+2. Calculate the end time for the quiz by adding `totalQuizTime` to the current time.
+3. Set the initial `questionIndex` to 0.
+
+4. **Loop through questions as long as:**
+   - There are more questions (`questionIndex < total number of questions`).
+   - The current time is less than the calculated quiz end time.
+
+5. **Within the loop:**
+   - Retrieve the current question using `questionIndex`.
+   - Calculate the remaining quiz time.
+   - Call `askQuestion` asynchronously, passing the current question and remaining quiz time.
+     - **If answer is correct**, increment `score` by 1.
+     - **If answer is incorrect or times out**, continue without changing the score.
+
+6. Move to the next question by incrementing `questionIndex`.
+
+7. Once the quiz is over, display a message showing the user’s final score.
+
+---
+
+## Method: `askQuestion`
+
+1. Display the question text for the current question.
+2. Start a countdown using `setInterval` to show the remaining time every second.
+
+3. Set a timeout (`questionTimeout`) for the current question, using either `timePerQuestion` or remaining quiz time, whichever is shorter.
+   - **If the question times out:** Display "Time up for this question!" and resolve the promise as `false` (incorrect answer).
+
+4. Prompt the user for input using `readline-sync`.
+
+5. **Clear `questionTimeout` and `interval` timers** to stop the countdown.
+
+6. **Check if the user’s answer matches the correct answer:**
+   - Compare both answers in lowercase to ensure case insensitivity.
+   - If correct, display "Correct!" and resolve the promise as `true`.
+   - If incorrect, display "Incorrect!" and resolve the promise as `false`.
+
+---
+
+## Initialize and Run Quiz App
+
+1. Define a list of questions, each containing `text` and `answer`.
+2. Create an instance of `QuizApp`, passing in the list of questions and total quiz time.
+3. Call `start` on the `QuizApp` instance to begin the quiz.
+
+---
+
