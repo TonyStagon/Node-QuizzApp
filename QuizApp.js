@@ -45,7 +45,8 @@ class QuizApp {
             clearTimeout(questionTimeout);
             clearInterval(interval);
 
-            if (answer === question.answer) {
+            // Make the answer comparison case-insensitive
+            if (answer.toLowerCase() === question.answer.toLowerCase()) {
                 console.log('Correct!');
                 resolve(true);
             } else {
@@ -60,11 +61,10 @@ class QuizApp {
 const questions = [
     { text: 'What is 2 + 2?', answer: '4' },
     { text: 'What is the capital of France?', answer: 'Paris' },
-    { text: 'Who is your  Facilitator in Code Tribe?', answer: 'Vukona' },
-    { text: 'What is the main  runtime enviroment involved  in this project', answer: 'node.js' },
+    { text: 'Who is your Facilitator in Code Tribe?', answer: 'Vukona' },
+    { text: 'What is the main runtime environment involved in this project?', answer: 'Node.js' },
     { text: 'Which country has the highest life expectancy?', answer: 'Monaco' },
-    { text: 'How many days in a week', answer: '7' },
-
+    { text: 'How many days in a week?', answer: '7' },
     // Add more questions as needed
 ];
 
